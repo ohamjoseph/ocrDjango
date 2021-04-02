@@ -1,0 +1,29 @@
+{%extends 'base/base.html'%}
+{%block style%}
+<style>
+    body{
+        background-color:#F2F2F2;
+    }
+</style>
+
+{%endblock%}
+{%block content%}
+<div class="row d-flex align-items-center justify-content-center" style="height: 600px;">
+    <div class="col-md-6">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="">
+                <label for="formFileDisabled" class="form-label text-center text-dark h3" style="margin:0 0 .5em 1em;">Telecharger le fichier</label>
+                <div class="row bg-dark rounded-pill" style="padding:2em;">
+                    <div class="d-flex flex-row">
+                        {{form.name}}
+                        <button type="submit" class="btn btn-light btn-rounded" id="btn"  style="margin-left:3em;">Envoyer</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+{%endblock%}

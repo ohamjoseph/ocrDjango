@@ -1,0 +1,59 @@
+{%extends 'base/base.html'%}
+
+{%block style%}
+<style>
+    body{
+        background-color:#F2F2F2;
+    }
+</style>
+{%endblock%}
+
+{%block form%}
+<form method="post" class="d-flex input-group w-auto ms-auto">
+    {% csrf_token %}
+  {{form}}
+  <button class="btn btn-outline-primary" type="submit" data-mdb-ripple-color="dark"
+  >Search</button>
+</form>
+{%endblock%}
+
+{%block content%}
+<div class="container-fluid mt-5">
+    <div class="card bg-dark text-white">
+      <div class="card-body">
+          <div class="row">
+          <div class="col-9 ">
+              <h5 class="card-title ">List des documents</h5>
+          </div>
+          <div class="col-3 ">
+              <a href="{% url 'upload' %}" type="button" class="btn btn-light">Ajouter un documment</a>
+          </div>
+          </div>
+
+      </div>
+    </div>
+</div>
+    <div class="container-fluid">
+        <div class="row">
+
+            {%for d in data%}
+
+                <div class="col-4">
+                <a href="{% url 'read' d.id %}" class="text-dark">
+                <div class="container-fluid mt-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">{{d.livre}}</h5>
+                      </div>
+                    </div>
+                </div>
+                </a>
+                </div>
+
+            {%endfor%}
+
+        </div>
+    </div>
+
+
+{%endblock%}

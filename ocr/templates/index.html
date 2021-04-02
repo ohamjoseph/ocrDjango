@@ -1,0 +1,139 @@
+{%extends 'base/base.html'%}
+{% load static %}
+{%block style%}
+<style>
+    body{
+        background-color:#F2F2F2;
+    }
+</style>
+{%endblock%}
+
+{%block form %}
+<form class="d-flex input-group w-auto ms-auto">
+  <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            </div>
+            <div class="col-6">
+                <div class="container">
+                    <div class="row d-flex">
+                        <div class="col btns" style="display: none;">
+                            <a class="btn btn-success btn-down col text-white me-2" type="submit" ><i class="bi bi-chevron-compact-down"></i>^</a>
+                            <a class="btn btn-success btn-up col text-white" type="submit"><i class="bi bi-chevron-compact-up"></i>|</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</form>
+{%endblock%}
+
+{%block content%}
+<div class="container-fuid mt-5">
+    <div class="row ">
+        <div class="col-8 pl-5">
+            <div class="container bg-white border mr-5 pt-5" id = "context">
+                {%for key, value in data.items%}
+
+                {%if 'grandTitre' in key %}
+                <h3 class="text-center m-3 text-secondary">{{value}}</h3>
+                {%elif 'soussoustitre' in key %}
+                    <p class="h4 px-5" id="{{key}}2">{{value}}</p>
+                {%elif 'soustitre' in key %}
+                    <p class="h3 px-3" id="{{key}}1">{{value}}</p>
+                {%elif "titre" in key %}
+                    <div class="h2" role="" id="{{key}}">
+                        {{value}}
+                    </div>
+
+                {%else%}
+                    <div class="ml-5">
+                        <hr>
+                        <div class="" role="">
+                            {{value|linebreaks}}
+                        </div>
+                        <hr>
+                    </div>
+                {%endif%}
+                {%endfor%}
+            </div>
+        </div>
+        <div class="col-4 sticky-top">
+            <ul class="list-group">
+                <li class="list-group-item bg-dark text-secondary">Sommaire</li>
+            {% for titre, value in data.items %}
+                {%if 'soussoustitre' in titre %}
+                    <li class="list-group-item px-5"><a href="#{{titre}}2">{{value}}</a></a></li>
+                {%elif 'soustitre' in titre %}
+                    <li class="list-group-item px-4"><a href="#{{titre}}1">{{value}}</a></a></li>
+                {%elif 'titre' in titre %}
+                     <li class="list-group-item"><a href="#{{titre}}">{{value}}</a></a></li>
+                {%endif%}
+            {%endfor%}
+             </ul>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block javaScript2%}
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.es6.js"></script>
+<script src="{% static 'hilitor.js' %}"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("input").on("input.highlight", function () {
+            // Determine specified search term
+            var searchTerm = $(this).val();
+            console.log(searchTerm);
+            // Highlight search term inside a specific context
+            $("#context").unmark().mark(searchTerm,
+                {
+                    "acrossElements": true,
+                    "separateWordSearch": false,
+                }
+            );
+            var numWord = $("mark").length
+
+            if(numWord >0){
+                $(".btns").show();
+
+
+            }else $(".btns").hide();
+            console.log();
+        }).trigger("input.highlight").focus();
+
+        $(".btn-down").on("click", function(){
+            window.find($("input").val(),false)
+
+        });
+
+        $(".btn-up").on("click", function(){
+            window.find($("input").val(),false,true)
+
+        });
+
+        $("form").submit(function (e){
+            e.preventDefault();
+            
+            window.find($("input").val(),false)
+        })
+
+    });
+
+</script>
+<style type="text/css">
+    mark {
+        padding: 0;
+        border-radius: 2px;
+        background: rgb(24, 58, 209);
+        color: rgb(255, 255, 255);
+    }
+</style>
+{%endblock%}

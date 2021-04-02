@@ -1,0 +1,157 @@
+{%extends 'base/base.html'%}
+{% load static %}
+{%block style%}
+<style>
+    body{
+        background-color:#F2F2F2;
+    }
+</style>
+{%endblock%}
+{%block form %}
+<form method="post" class="d-flex input-group w-auto ms-auto">
+  <div class="container">
+        <div class="row">
+            <div class="col-6">
+                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+            </div>
+            <div class="col-6">
+                <div class="container">
+                    <div class="row d-flex">
+                        <div class="col btns" style="display: none;">
+                            <a class="btn btn-success btn-down col text-white me-2" type="submit" ><i class="bi bi-chevron-compact-down"></i>^</a>
+                            <a class="btn btn-success btn-up col text-white" type="submit"><i class="bi bi-chevron-compact-up"></i>|</a>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</form>
+{%endblock%}
+{%block content%}
+<div class="container-fuid mt-5">
+    <div class="row ">
+        <div class="col-8 pl-5">
+            <div class="container bg-white border mr-5 pt-5" id = "context">
+                {%for key, value in data.items%}
+
+                {%if 'code' in key %}
+                <h3 class="text-center text-black-50">{{value}}</h3>
+                {%elif 'def' in key%}
+                    {%if 'definition' in key%}
+                        <strong>{{value}}</strong>
+                    {%elif 'def' in key%}
+                        {{value}}
+                    {%endif%}
+                {%elif 'Ar' in key%}
+                    {%if 'dArticle' in key%}
+                        <strong id = "{{key}}da">{{value}}</strong>
+                    {%elif 'Artcontenu' in key%}
+                        {{value}}<br/><br/>
+                    {%endif%}
+                {%elif 'chapitre' in key %}
+                    <p class="h5" id="{{key}}c">{{value}}</p>
+                {%elif 'partie' in key %}
+                    <p class="h5" id="{{key}}p">{{value}}</p>
+                {%elif 'article' in key %}
+                    <p class="h4" id="{{key}}a">{{value}}</p>
+                {%elif 'livre' in key %}
+                    <p class="h3" id="{{key}}l">{{value}}</p>
+                {%elif 'section' in key %}
+                    <p class="h5" id="{{key}}s">{{value}}</p>
+                {%elif "titre" in key %}
+                    <p class="h2" role="" id="{{key}}t">
+                        {{value}}
+                    </p>
+                    <hr/>
+
+                {%else%}
+                    <div class="ml-5">
+                        <div class="" role="">
+                            {{value|linebreaks}}
+                        </div>
+
+                    </div>
+                {%endif%}
+                {%endfor%}
+            </div>
+        </div>
+        <div class="col-4 sticky-top">
+            <ul class="list-group">
+                <li class="list-group-item bg-dark text-white">Sommaire</li>
+            {% for titre, value in data.items %}
+                {%if 'article' in titre %}
+                    <li class="list-group-item"><a href="#{{titre}}a" class="text-body">{{value}}</a></a></li>
+                {%elif 'partie' in titre %}
+                    <li class="list-group-item"><a href="#{{titre}}p" class="text-body">{{value}}</a></a></li>
+                {%elif 'dArticle' in titre %}
+                    <li class="list-group-item"><a href="#{{titre}}da" class="text-body">{{value}}</a></a></li>
+                {%elif 'livre' in titre %}
+                    <li class="list-group-item"><a href="#{{titre}}l" class="text-dark">{{value}}</a></a></li>
+                {%elif 'section' in titre %}
+                    <li class="list-group-item"><a href="#{{titre}}s" class="text-dark">{{value}}</a></a></li>
+                {%elif 'chapitre' in titre %}
+                    <li class="list-group-item"><a href="#{{titre}}c" class="text-dark">{{value}}</a></a></li>
+                {%elif 'titre' in titre %}
+                     <li class="list-group-item "><a class="text-dark" href="#{{titre}}t">{{value}}</a></a></li>
+                {%endif%}
+            {%endfor%}
+             </ul>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block javaScript2%}
+<script src="http://libs.baidu.com/jquery/1.7.2/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/jquery.mark.es6.js"></script>
+<script src="{% static 'hilitor.js' %}"></script>
+
+<script type="text/javascript">
+    $(function () {
+        $("input").on("input.highlight", function () {
+            // Determine specified search term
+            var searchTerm = $(this).val();
+            console.log(searchTerm);
+            // Highlight search term inside a specific context
+            $("#context").unmark().mark(searchTerm,
+                {
+                    "acrossElements": true,
+                    "separateWordSearch": false,
+                }
+            );
+            var numWord = $("mark").length
+
+            if(numWord >0){
+                $(".btns").show();
+
+
+            }else $(".btns").hide();
+            console.log();
+        }).trigger("input.highlight").focus();
+
+        $(".btn-down").on("click", function(){
+            window.find($("input").val(),false)
+
+        });
+
+        $(".btn-up").on("click", function(){
+            window.find($("input").val(),false,true)
+
+        });
+
+    });
+
+</script>
+<style type="text/css">
+    mark {
+        padding: 0;
+        border-radius: 2px;
+        background: rgb(24, 58, 209);
+        color: rgb(255, 255, 255);
+    }
+</style>
+{%endblock%}

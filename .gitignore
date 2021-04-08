@@ -1,3 +1,9 @@
 **/media/
 
+<<<<<<< HEAD
 *.pdf
+=======
+**/textExtract/images/
+
+*.pdfmedia
+>>>>>>> otherOcr

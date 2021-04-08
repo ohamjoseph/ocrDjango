@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="c9ed00c8-1307-469e-b3ae-ffdbe566c64b" name="Default Changelist" comment="" />
+=======
+    <list default="true" id="c9ed00c8-1307-469e-b3ae-ffdbe566c64b" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ocr/templates/base/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/ocr/templates/base/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ocr/templates/indexJuridique.html" beforeDir="false" afterPath="$PROJECT_DIR$/ocr/templates/indexJuridique.html" afterDir="false" />
+    </list>
+>>>>>>> otherOcr
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +24,15 @@
       </list>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="ProjectId" id="1n3LH8ajlDNw4VkN87OaD1JM7s0" />
+=======
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1n3LH8ajlDNw4VkN87OaD1JM7s0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+>>>>>>> otherOcr
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -46,6 +63,21 @@
     </task>
     <servers />
   </component>
+<<<<<<< HEAD
+=======
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+>>>>>>> otherOcr
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>

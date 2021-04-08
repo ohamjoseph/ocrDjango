@@ -18,8 +18,12 @@
                 <div class="container">
                     <div class="row d-flex">
                         <div class="col btns" style="display: none;">
+
                             <a class="btn btn-success btn-down col text-white me-2" type="submit" ><i class="bi bi-chevron-compact-down"></i>^</a>
                             <a class="btn btn-success btn-up col text-white" type="submit"><i class="bi bi-chevron-compact-up"></i>|</a>
+                            <a class="btn btn-success btn-down col text-white me-2" type="submit" ><i class="bi bi-chevron-compact-down"></i></a>
+                            <a class="btn btn-success btn-up col text-white" type="submit"><i class="bi bi-chevron-compact-up"></i></a>
+
                         </div>
 
                     </div>
@@ -142,6 +146,13 @@
             window.find($("input").val(),false,true)
 
         });
+
+
+        $("form").submit(function (e){
+            e.preventDefault();
+            
+            window.find($("input").val(),false)
+        })
 
     });
 

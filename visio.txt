@@ -1,26 +1,45 @@
-Article 153:
+DEVELOPPEMENT D’UNE PLATEFORME WEB POUR LE SUIVI DES ENSEIGNEMENTS ET
+LA GESTION DES DELIBERATIONS
 
-A la date d'entrée en vigueur de la loi, objet du présent code, il pourrait étre accordé, en
-cas de besoin, un délai a observer pour se conformer aux dispositions de celle-ci.
+ 
 
-Ce délai ainsi que les mesures transitoires sont précisés par voie réglementaire.
+vY La nécessité de contribuer a la reléve académique afin de renforcer les effectifs des
+enseignants-chercheurs permanents actuels des universités publiques et d’assurer une
+masse critique de formateurs couvrant les différents aspects de 1’ Informatique dans les
+secteurs de développement du pays ;
+¥ La nécessité de développer l’apport de l’informatique aux autres domaines
+d’enseignement et de recherche notamment a l’UFR-SEA vu son caractére transversal.
+De par les textes réglementaires qui incombent |’Université Joseph KI ZERBO, le
+département Informatique a pour missions :
+¥ D/organiser et animer les enseignements théoriques, les travaux pratiques et les travaux
+dirigés a travers les parcours de formations initiales et/ou continues et/ou a distance ;
+Y De veiller a garantir au sein de l’ Université, la qualité scientifique et des enseignements
+relevant de son champ de compétence ;
+¥Y D/’organiser et animer la recherche en informatique ainsi que dans les domaines
+connexes ;
+¥ Doffrir toute prestation de service sous forme de consultation, conseil ou expertise qui
+reléve de son champ de compétence ;
+¥ D?’entreprendre toute initiative destinée 4 promouvoir le développement de son champ
+de compétence de |’ Université Joseph KI ZERBO
+L’Informatique pour son développement en tant que science de |’ingénieur, s’appuie sur les
+mathématiques, la physique et la chimie qui constituent le socle.
+4. Formations proposées par le département informatique
 
-Article 154:
+a. Formation en licence Informatique
 
-La répartition du produit des amendes prononcées en application de la présente loi, est
-fixée par voie réglementaire.
+i. Présentation
+La licence Informatique est axée sur l’ingénierie des systémes informatiques (Systeme
 
-Article 155:
+d’information et Réseaux). Elle permet d’acquérir un socle de connaissances et de compétences
+nécessaires en systémes informatiques et en méthodes de conception et de développement de logiciels
+et de médias numériques. Les compétences et connaissances acquises permettent ensuite de s’insérer
+dans la vie professionnelle en construisant un parcours personnel professionnalisant grace a des
+modules professionnels et 4 un stage obligatoire a la fin du semestre six avant de poursuivre en master
+informatique.
+ii. Objectifs
+Son objectif général est de former des techniciens et cadres de niveau Licence, ayant des
 
-Les présentes dispositions ne font pas obstacle au droit des autorités administratives
-compétentes de prescrire, par voie réglementaire, toute mesure de protection
-particuliére non prévue dans le présent code en vue d'assurer I'hygiéne publique.
+compétences bien précises dans les métiers de |’informatique.
 
-Toutefois, elles doivent requérir l'avis du ministre chargé de la santé avant la publication
-et la mise en application du réglement.
-
-Article 156:
-
-La présente loi qui abroge toutes dispositions antérieures contraires sera exécutée
-comme loi de |'Etat.
+Rapport de Fin de Cycle Réalisé par LEGRENE Inoussa 4
 

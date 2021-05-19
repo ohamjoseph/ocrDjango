@@ -1,6 +1,7 @@
 import os
 
 #import pytesseract as pytesseract
+from django.contrib.auth import authenticate, login
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
@@ -9,13 +10,65 @@ from pdf2image import convert_from_path, convert_from_bytes
 
 
 # Create your views here.
-from ocr.forms import FormUploadPDF, SearchForm
+from ocr.forms import FormUploadPDF, SearchForm, LoginForm
 from ocrDjango.settings import BASE_DIR
 
 from textExtract.extractor import extractor
 from textExtract.schema1 import schema2, schema1, schema3, schema4, schema5, juridiqueSch
 
 from bson.objectid import ObjectId
+
+def connexion(request):
+    context = {}
+    if request.method == 'POST':
+        print(0)
+        form = LoginForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        print(form.errors)
+        if form.is_valid():
+            print(1)
+            user = authenticate(request, username=username, password=password)
+            if user:
+                print(2)
+                login(request, user=user)
+                # permettre plutot une redirectin vers next=
+                return redirect('ocr:acceuil')
+            else:
+                context['errors'] = True
+                context['form'] = form
+        else:
+            context['errors'] = True
+            context['form'] = form
+    else:
+        context['form'] = LoginForm()
+    return render(request, 'login.html', context)
+
+def inscription(request):
+    context = {'register':True}
+    if request.method == 'POST':
+        print(0)
+        form = LoginForm(request.POST)
+        username = request.POST['username']
+        password = request.POST['password']
+        print(form.errors)
+        if form.is_valid():
+            print(1)
+            user = authenticate(request, username=username, password=password)
+            if user:
+                print(2)
+                login(request, user=user)
+                # permettre plutot une redirectin vers next=
+                return redirect('ocr:acceuil')
+            else:
+                context['errors'] = True
+                context['form'] = form
+        else:
+            context['errors'] = True
+            context['form'] = form
+    else:
+        context['form'] = LoginForm()
+    return render(request, 'login.html', context)
 
 def read(request,data):
     client = MongoClient()
@@ -155,53 +208,62 @@ def upload(request):
 
             pdf = form.save()
 
-            filename_with_extension = os.path.basename(pdf.name.path)
-            extension = os.path.splitext(filename_with_extension)[1]
-            filename = os.path.splitext(filename_with_extension)[0]
+            print(pdf.name)
 
-            text_file = os.path.join(BASE_DIR,'media','text',filename+'.txt')
-            fp = open(text_file,'a+')
+            # filename_with_extension = os.path.basename(pdf.name.path)
+            # extension = os.path.splitext(filename_with_extension)[1]
+            # filename = os.path.splitext(filename_with_extension)[0]
 
-            extractor(pdf.name.path,fp,int(debut),int(fin))
-            fp.close()
-            if extension.lower() == ".pdf":
-                if loi == str(2):
-                    template = 'indexJuridique.html'
-                    data = juridiqueSch(text_file)
-                else:
-                    template = 'index.html'
-                    data = schema5(text_file)
+            
+            # data = {
+            #     "path":pdf.name.path,
+            #     "debut":debut,
+            #     "fin":fin,
+            #     "loi":loi
+            # }
+            # text_file = os.path.join(BASE_DIR,'media','text',filename+'.txt')
+            # fp = open(text_file,'a+')
 
-            else:
-                if loi == str(2):
-                    doc = "loi"
-                    template = 'indexJuridique.html'
-                    data = juridiqueSch(text_file)
-                else:
-                    doc = "doc"
-                    template = 'index.html'
-                    data = schema5(text_file)
+            # extractor(pdf.name.path,fp,int(debut),int(fin))
+            # fp.close()
+            # if extension.lower() == ".pdf":
+            #     if loi == str(2):
+            #         template = 'indexJuridique.html'
+            #         data = juridiqueSch(text_file)
+            #     else:
+            #         template = 'index.html'
+            #         data = schema5(text_file)
 
-            document = {}
-            document['livre'] = filename
-            document['doc'] = doc
-            document['data'] = data
+            # else:
+            #     if loi == str(2):
+            #         doc = "loi"
+            #         template = 'indexJuridique.html'
+            #         data = juridiqueSch(text_file)
+            #     else:
+            #         doc = "doc"
+            #         template = 'index.html'
+            #         data = schema5(text_file)
 
-            client = MongoClient()
+            # document = {}
+            # document['livre'] = filename
+            # document['doc'] = doc
+            # document['data'] = data
 
-            db = client.ocr_db
-            collection = db.documents
-            rs =collection.insert_one(document).inserted_id
+            # client = MongoClient()
 
-            context = {
+            # db = client.ocr_db
+            # collection = db.documents
+            # rs =collection.insert_one(document).inserted_id
 
-                'data': collection.find_one(
-                    {'_id': rs},
-                    {'data': 1, '_id': 0}
-                )
-            }
+            # context = {
 
-            return render(request,template,context=context['data'])
+            #     'data': collection.find_one(
+            #         {'_id': rs},
+            #         {'data': 1, '_id': 0}
+            #     )
+            # }
+
+            return redirect("extract", lien = pdf.name, debut = debut, fin = fin, loi = loi)
 
     form = FormUploadPDF()
     return render(request, 'upload2.html', {'form': form})
@@ -222,3 +284,47 @@ def upload2(pdf):
     pdfFileObj.close()
 
     return texts
+
+def extractTextDoc(request, lien, debut, fin,loi):
+
+    filename_with_extension = os.path.basename(lien.path)
+    extension = os.path.splitext(filename_with_extension)[1]
+    filename = os.path.splitext(filename_with_extension)[0]
+
+    text_file = os.path.join(BASE_DIR,'media','text',filename+'.txt')
+    fp = open(text_file,'a+')
+
+    extractor(lien.path,fp,int(debut),int(fin))
+    fp.close()
+    if extension.lower() == ".pdf":
+        if loi == str(2):
+            doc = "loi"
+            #template = 'indexJuridique.html'
+            data = juridiqueSch(text_file)
+        else:
+            doc = "doc"
+            #template = 'index.html'
+            data = schema5(text_file)
+
+    else:
+        if loi == str(2):
+            doc = "loi"
+           # template = 'indexJuridique.html'
+            data = juridiqueSch(text_file)
+        else:
+            doc = "doc"
+            #template = 'index.html'
+            data = schema5(text_file)
+
+    document = {}
+    document['livre'] = filename
+    document['doc'] = doc
+    document['data'] = data
+
+    client = MongoClient()
+
+    db = client.ocr_db
+    collection = db.documents
+    rs =collection.insert_one(document).inserted_id
+
+    return redirect('read', data=rs)

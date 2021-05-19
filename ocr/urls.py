@@ -21,9 +21,14 @@ from ocr.views import *
 
 
 urlpatterns = [
-    path('', index, name = 'acceuil'),
+    path('', connexion, name = 'login'),
+    # path('login', connexion, name = 'login'),
+    path('register', inscription, name = 'register'),
+
+    path('acceuil', index, name = 'acceuil'),
     path('upload/', upload, name = 'upload'),
     path('read/<str:data>/', read, name = 'read'),
+    path('extract/<str:lien>/<str:debut>/<str:fin>/<str:loi>', extractTextDoc, name = 'extract'),
 
 
 ]

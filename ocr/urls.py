@@ -24,10 +24,12 @@ urlpatterns = [
     path('', connexion, name = 'login'),
     # path('login', connexion, name = 'login'),
     path('register', inscription, name = 'register'),
+    path('deconnexion', deconnexion, name = 'logout'),
 
     path('acceuil', index, name = 'acceuil'),
     path('upload/', upload, name = 'upload'),
     path('read/<str:data>/', read, name = 'read'),
+    path('delete/<str:data>/', delete, name = 'delete'),
     path('extract/<str:lien>/<str:debut>/<str:fin>/<str:loi>', extractTextDoc, name = 'extract'),
 
 

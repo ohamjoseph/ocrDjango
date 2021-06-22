@@ -1,39 +1,40 @@
 import os
 
 #import pytesseract as pytesseract
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.core.files.uploadedfile import TemporaryUploadedFile
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from pymongo import MongoClient
-from pdf2image import convert_from_path, convert_from_bytes
-
 
 # Create your views here.
-from ocr.forms import FormUploadPDF, SearchForm, LoginForm
+from ocr.forms import FormUploadPDF, SearchForm, LoginForm, RegisterForm
 from ocrDjango.settings import BASE_DIR
 
 from textExtract.extractor import extractor
-from textExtract.schema1 import schema2, schema1, schema3, schema4, schema5, juridiqueSch
+from textExtract.schema1 import schema5, juridiqueSch
 
 from bson.objectid import ObjectId
 
+
 def connexion(request):
-    context = {}
-    if request.method == 'POST':
-        print(0)
+    context = {'form2':RegisterForm()}
+    if request.user.is_authenticated:
+        return redirect('acceuil')
+    elif request.method == 'POST':
         form = LoginForm(request.POST)
         username = request.POST['username']
         password = request.POST['password']
-        print(form.errors)
         if form.is_valid():
-            print(1)
+
             user = authenticate(request, username=username, password=password)
             if user:
-                print(2)
+
                 login(request, user=user)
                 # permettre plutot une redirectin vers next=
-                return redirect('ocr:acceuil')
+                return redirect('acceuil')
             else:
                 context['errors'] = True
                 context['form'] = form
@@ -43,46 +44,62 @@ def connexion(request):
     else:
         context['form'] = LoginForm()
     return render(request, 'login.html', context)
+
+def deconnexion(request):
+    logout(request)
+    return redirect("login")
 
 def inscription(request):
-    context = {'register':True}
+    context = {'register':True,
+               'form': LoginForm()}
+
     if request.method == 'POST':
-        print(0)
-        form = LoginForm(request.POST)
-        username = request.POST['username']
-        password = request.POST['password']
-        print(form.errors)
-        if form.is_valid():
-            print(1)
-            user = authenticate(request, username=username, password=password)
+        form2 = RegisterForm(request.POST)
+        if form2.is_valid():
+
+
+            username = form2.cleaned_data.get('username')
+            email = form2.cleaned_data.get('email')
+            raw_password = form2.cleaned_data.get('password')
+
+            User.objects.create_user(username,email,raw_password)
+
+            user = authenticate(username=username, password=raw_password)
             if user:
-                print(2)
                 login(request, user=user)
                 # permettre plutot une redirectin vers next=
-                return redirect('ocr:acceuil')
+                return redirect('acceuil')
             else:
-                context['errors'] = True
-                context['form'] = form
+                context['error'] = True
+                context['form2'] = form2
         else:
-            context['errors'] = True
-            context['form'] = form
+            context['error'] = True
+            context['form2'] = form2
     else:
-        context['form'] = LoginForm()
+        context['form2'] = RegisterForm()
     return render(request, 'login.html', context)
 
-def read(request,data):
+
+def read(request, data):
     client = MongoClient()
-    print(type(data))
-    print(2)
 
     document = client.ocr_db.documents.find_one({'_id': ObjectId(data)})
     print(document['doc'])
     if document['doc'] == 'doc':
-        return render(request, 'index.html', context={'data':document['data']})
+        return render(request, 'index.html', context={'data':document['data'],'id':data})
     elif document['doc'] == '' or document['doc'] == 'loi':
-        return render(request, 'indexJuridique.html', context={'data':document['data']})
+        return render(request, 'indexJuridique.html', context={'data':document['data'], 'id':data})
 
+@login_required
+def delete(request, data):
+    client = MongoClient()
+    document = client.ocr_db.documents.delete_one({'_id': ObjectId(data)})
+    if document:
+        return redirect('acceuil')
+    else:
+        return redirect('read',data)
 
+@login_required
 def index(request):
     client = MongoClient()
 
@@ -92,7 +109,7 @@ def index(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
         if form.is_valid():
-            searchTerm = form.cleaned_data['searchTerm']
+            searchTerm = form.cleaned_data['searchterm']
 
             data = collection.find({"$text": {"$search": searchTerm}},
                                     { "_id": 0,

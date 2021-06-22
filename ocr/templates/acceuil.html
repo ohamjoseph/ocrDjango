@@ -9,9 +9,13 @@
 {%endblock%}
 
 {%block form%}
-<form method="post" class="d-flex input-group w-auto ms-auto">
+
+<form method="post" class="d-flex input-group w-auto ">
     {% csrf_token %}
-  {{form}}
+    {% for f in form%}
+        {{f}}
+    {% endfor %}
+
   <button class="btn btn-outline-primary" type="submit" data-mdb-ripple-color="dark"
   >Search</button>
 </form>
@@ -19,14 +23,14 @@
 
 {%block content%}
 <div class="container-fluid mt-5">
-    <div class="card bg-dark text-white">
+    <div class="card bg2 text-white">
       <div class="card-body">
           <div class="row">
           <div class="col-9 ">
               <h5 class="card-title ">List des documents</h5>
           </div>
           <div class="col-3 ">
-              <a href="{% url 'upload' %}" type="button" class="btn btn-light">Ajouter un documment</a>
+              {% if request.user.is_staff %}<a href="{% url 'upload' %}" type="button" class="btn btn-light">Ajouter un documment</a>{% endif %}
           </div>
           </div>
 
@@ -37,18 +41,22 @@
         <div class="row">
 
             {%for d in data%}
+                {% if d.data.code %}
 
-                <div class="col-4">
-                <a href="{% url 'read' d.id %}" class="text-dark">
-                <div class="container-fluid mt-2">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">{{d.livre}}</h5>
-                      </div>
+                    <div class="col-4">
+                    <a href="{% url 'read' d.id %}" class="text-dark">
+                    <div class="container-fluid mt-2">
+                        <div class="card">
+                          <div class="card-body">
+                            <h5 class="card-title">{{d.data.code}}</h5>
+                          </div>
+                        </div>
                     </div>
-                </div>
-                </a>
-                </div>
+                    </a>
+                    </div>
+
+                {% endif %}
+
 
             {%endfor%}
 

@@ -159,8 +159,8 @@ def upload3(request):
         if form.is_valid():
 
             file_obj = request.FILES.get('name', None)
-            debut = request.POST["debut"]
-            fin = request.POST["fin"]
+            debut = int(request.POST["debut"]) if request.POST["debut"] else None
+            fin = int(request.POST["fin"]) if request.POST["fin"] else None
             pdf = form.save()
             filename_with_extension = os.path.basename(pdf.name.path)
             extension = os.path.splitext(filename_with_extension)[1]
@@ -169,7 +169,7 @@ def upload3(request):
             text_file = os.path.join(BASE_DIR,'media','text',filename+'.txt')
             fp = open(text_file,'a+')
 
-            extractor(pdf.name.path,fp,int(debut),int(fin))
+            extractor(pdf.name.path,fp,debut,fin)
             fp.close()
             if extension.lower() == ".pdf":
                 data = schema5(text_file)
@@ -219,68 +219,59 @@ def upload(request):
         form = FormUploadPDF(request.POST, request.FILES)
         if form.is_valid():
 
-            debut = request.POST["debut"]
-            fin = request.POST["fin"]
+            debut = int(request.POST["debut"]) if request.POST["debut"] else None
+            fin = int(request.POST["fin"]) if request.POST["fin"] else None
             loi = (request.POST["loi"] or False)
 
             pdf = form.save()
 
-            print(pdf.name)
+            filename_with_extension = os.path.basename(pdf.name.path)
+            extension = os.path.splitext(filename_with_extension)[1]
+            filename = os.path.splitext(filename_with_extension)[0]
 
-            # filename_with_extension = os.path.basename(pdf.name.path)
-            # extension = os.path.splitext(filename_with_extension)[1]
-            # filename = os.path.splitext(filename_with_extension)[0]
+            text_file = os.path.join(BASE_DIR,'media','text',filename+'.txt')
+            fp = open(text_file,'a+')
 
-            
-            # data = {
-            #     "path":pdf.name.path,
-            #     "debut":debut,
-            #     "fin":fin,
-            #     "loi":loi
-            # }
-            # text_file = os.path.join(BASE_DIR,'media','text',filename+'.txt')
-            # fp = open(text_file,'a+')
+            extractor(pdf.name.path,fp,debut,fin)
+            fp.close()
+            if extension.lower() == ".pdf":
+                if loi == str(2):
+                    template = 'indexJuridique.html'
+                    data = juridiqueSch(text_file)
+                else:
+                    template = 'index.html'
+                    data = schema5(text_file)
 
-            # extractor(pdf.name.path,fp,int(debut),int(fin))
-            # fp.close()
-            # if extension.lower() == ".pdf":
-            #     if loi == str(2):
-            #         template = 'indexJuridique.html'
-            #         data = juridiqueSch(text_file)
-            #     else:
-            #         template = 'index.html'
-            #         data = schema5(text_file)
+            else:
+                if loi == str(2):
+                    doc = "loi"
+                    template = 'indexJuridique.html'
+                    data = juridiqueSch(text_file)
+                else:
+                    doc = "doc"
+                    template = 'index.html'
+                    data = schema5(text_file)
 
-            # else:
-            #     if loi == str(2):
-            #         doc = "loi"
-            #         template = 'indexJuridique.html'
-            #         data = juridiqueSch(text_file)
-            #     else:
-            #         doc = "doc"
-            #         template = 'index.html'
-            #         data = schema5(text_file)
+            document = {}
+            document['livre'] = filename
+            document['doc'] = doc
+            document['data'] = data
 
-            # document = {}
-            # document['livre'] = filename
-            # document['doc'] = doc
-            # document['data'] = data
+            client = MongoClient()
 
-            # client = MongoClient()
+            db = client.ocr_db
+            collection = db.documents
+            rs =collection.insert_one(document).inserted_id
 
-            # db = client.ocr_db
-            # collection = db.documents
-            # rs =collection.insert_one(document).inserted_id
+            context = {
 
-            # context = {
+                'data': collection.find_one(
+                    {'_id': rs},
+                    {'data': 1, '_id': 0}
+                )
+            }
 
-            #     'data': collection.find_one(
-            #         {'_id': rs},
-            #         {'data': 1, '_id': 0}
-            #     )
-            # }
-
-            return redirect("extract", lien = pdf.name, debut = debut, fin = fin, loi = loi)
+            return redirect('acceuil')
 
     form = FormUploadPDF()
     return render(request, 'upload2.html', {'form': form})

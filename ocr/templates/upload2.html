@@ -8,12 +8,11 @@
 
 {%endblock%}
 {%block content%}
-<div class="row d-flex align-items-center justify-content-center" style="height: 600px;">
+<div class="container-fluid">
+    <div class="row d-flex align-items-center justify-content-center" style="height: 600px;">
     <div class="col-md-6">
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="">
-
                 <label for="formFileDisabled" class="form-label text-center text-dark h3" style="margin:0 0 .5em 1em;">Telecharger le fichier</label>
                 <div class="row bg rounded-pill" style="padding:2em;">
                     <div class="d-flex flex-row">
@@ -22,14 +21,14 @@
                 </div>
                 <div class="container">
                     <div class="row d-flex align-items-center justify-content-center">
-                    <div class="form-outline m-2 col-3">
-                        <input type="text" id="form1" name = "debut" class="form-control" />
-                        <label class="form-label" for="form1">Debut</label>
-                    </div>
-                    <div class="form-outline m-2 col-3">
-                        <input type="text" name = "fin" id="form2" class="form-control" />
-                        <label class="form-label"  for="form2">Fin</label>
-                    </div>
+                        <div class="form-outline m-2 col-3">
+                            <input type="text" id="form1" name = "debut" class="form-control" />
+                            <label class="form-label" for="form1">Debut</label>
+                        </div>
+                        <div class="form-outline m-2 col-3">
+                            <input type="text" name = "fin" id="form2" class="form-control" />
+                            <label class="form-label"  for="form2">Fin</label>
+                        </div>
                         <div class="col-2">
                             <select name = "loi" class="custom-select">
 
@@ -38,17 +37,15 @@
 
                             </select>
                         </div>
-                            <div class="col-3">
+                        <div class="col-3">
                                 <button type="submit" class="btn bg2 text-white btn-rounded " id="btn"  style="margin-left:3em;">Envoyer</button>
                             </div>
-                        </div>
                     </div>
                 </div>
 
-            </div>
+
         </form>
     </div>
 </div>
-
-
+</div>
 {%endblock%}

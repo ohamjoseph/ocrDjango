@@ -1,45 +1,51 @@
-DEVELOPPEMENT D’UNE PLATEFORME WEB POUR LE SUIVI DES ENSEIGNEMENTS ET
-LA GESTION DES DELIBERATIONS
+Article 111-6 :
 
- 
+Toute personne accusée de la commission d'une infraction est présumée innocente jusqu'a ce que
+sa culpabilité ait été légalement établie.
 
-vY La nécessité de contribuer a la reléve académique afin de renforcer les effectifs des
-enseignants-chercheurs permanents actuels des universités publiques et d’assurer une
-masse critique de formateurs couvrant les différents aspects de 1’ Informatique dans les
-secteurs de développement du pays ;
-¥ La nécessité de développer l’apport de l’informatique aux autres domaines
-d’enseignement et de recherche notamment a l’UFR-SEA vu son caractére transversal.
-De par les textes réglementaires qui incombent |’Université Joseph KI ZERBO, le
-département Informatique a pour missions :
-¥ D/organiser et animer les enseignements théoriques, les travaux pratiques et les travaux
-dirigés a travers les parcours de formations initiales et/ou continues et/ou a distance ;
-Y De veiller a garantir au sein de l’ Université, la qualité scientifique et des enseignements
-relevant de son champ de compétence ;
-¥Y D/’organiser et animer la recherche en informatique ainsi que dans les domaines
-connexes ;
-¥ Doffrir toute prestation de service sous forme de consultation, conseil ou expertise qui
-reléve de son champ de compétence ;
-¥ D?’entreprendre toute initiative destinée 4 promouvoir le développement de son champ
-de compétence de |’ Université Joseph KI ZERBO
-L’Informatique pour son développement en tant que science de |’ingénieur, s’appuie sur les
-mathématiques, la physique et la chimie qui constituent le socle.
-4. Formations proposées par le département informatique
+Nul ne peut étre reconnu coupable d'une infraction, ni condamné a une peine autrement que par
+décision d'une juridiction compétente.
+Article 111-7 :
 
-a. Formation en licence Informatique
+Les traités, accords ou conventions diiment ratifiés et publiés s'imposent aux dispositions pénales
+internes.
 
-i. Présentation
-La licence Informatique est axée sur l’ingénierie des systémes informatiques (Systeme
+Article 111-8 :
 
-d’information et Réseaux). Elle permet d’acquérir un socle de connaissances et de compétences
-nécessaires en systémes informatiques et en méthodes de conception et de développement de logiciels
-et de médias numériques. Les compétences et connaissances acquises permettent ensuite de s’insérer
-dans la vie professionnelle en construisant un parcours personnel professionnalisant grace a des
-modules professionnels et 4 un stage obligatoire a la fin du semestre six avant de poursuivre en master
-informatique.
-ii. Objectifs
-Son objectif général est de former des techniciens et cadres de niveau Licence, ayant des
+Il y a concours d'infractions lorsqu'une infraction est commise par une personne avant que celle-ci
+ait été définitivement condamnée pour une autre infraction.
 
-compétences bien précises dans les métiers de |’informatique.
+En cas de conviction de plusieurs crimes ou délits, la peine la plus forte est seule prononcée.
 
-Rapport de Fin de Cycle Réalisé par LEGRENE Inoussa 4
+Il y a cumul des peines en cas de concours réel entre contraventions, entre délits et contraventions
+non connexes ou entre crimes et contraventions non connexes.
+
+Article 111-9:
+
+Lorsqu'un individu fait l'objet de plusieurs condamnations pour des crimes ou des délits résultant
+de poursuites diverses devant toute juridiction, la confusion des peines doit étre prononcée.
+
+Lorsqu'une peine principale fait l'objet d'une remise gracieuse, il y a lieu de tenir compte, pour
+l'application de la confusion des peines, de la peine résultant de la commutation et non de la peine
+initialement prononcée.
+
+CHAPITRE 2 : DE L'APPLICATION DE LA LOI PENALE DANS LE TEMPS
+Article 112-1:
+
+La loi qui efface la nature punissable d'un fait a un effet rétroactif. Elle arréte toute poursuite en
+cours ainsi que l'exécution de la peine prononcée.
+
+La loi qui allége une peine a un effet rétroactif. Elle s'applique aux infractions commises avant
+son entrée en vigueur et qui n'ont pas donné lieu a une condamnation passée en force de chose
+jugée.
+
+La loi qui rend un fait punissable ou qui aggrave une peine n'a point d'effet rétroactif.
+
+CHAPITRE 3 : DE L'APPLICATION DE LA LOI PENALE DANS L'ESPACE
+Article 113-1 :
+
+La loi pénale burkinabé s'applique a toute infraction commise sur le territoire national quelle que
+soit la nationalité de son auteur.
+
+La loi pénale s'applique également aux infractions commises par un national ou contre un
 

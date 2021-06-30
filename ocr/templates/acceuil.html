@@ -27,7 +27,7 @@
       <div class="card-body">
           <div class="row">
           <div class="col-9 ">
-              <h5 class="card-title ">List des documents</h5>
+              <h5 class="card-title ">Liste des documents</h5>
           </div>
           <div class="col-3 ">
               {% if request.user.is_staff %}<a href="{% url 'upload' %}" type="button" class="btn btn-light">Ajouter un documment</a>{% endif %}

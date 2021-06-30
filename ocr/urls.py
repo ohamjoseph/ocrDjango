@@ -30,7 +30,6 @@ urlpatterns = [
     path('upload/', upload, name = 'upload'),
     path('read/<str:data>/', read, name = 'read'),
     path('delete/<str:data>/', delete, name = 'delete'),
-    path('extract/<str:lien>/<str:debut>/<str:fin>/<str:loi>', extractTextDoc, name = 'extract'),
 
 
 ]

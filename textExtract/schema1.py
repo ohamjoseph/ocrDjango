@@ -4,7 +4,6 @@ import unicodedata
 
 from unidecode import unidecode
 
-from ocrDjango.settings import BASE_DIR
 #----------------------------------------------------------------
 
 def outAccent(string):
@@ -24,7 +23,6 @@ def getTitre(text):
 
     lettre = '[A-Z]'
     romainG = '([Il]{1,3})|^([Il]?V)|^V([Il]{1,3})|^([Il]?X)'
-    romainp = '(i{1,3})|^(i?v)|^v(i{1,3})|^(i?x)'
     titreR = "^(" + romainG + ")[.|)]?(\s[a-zA-Z\']+)+\s?$"  # text xx
     titreL = "^([A-Z])[.|)]?(\s[a-zA-Z\']+)+\s?$"  # text xx
     titreN = "^(\d)[.|)]?(\s[a-zA-Z\'’é:-]+)+\s?$"  # text xx
@@ -76,7 +74,7 @@ def getTitre(text):
 
 def schema1(filename):
     with open(filename) as f:
-        print(filename)
+
         data = {}
         block = 1
         l = 1
@@ -145,9 +143,9 @@ def schema2(filename):
                 if contenu != "" and not arg:
                     data["contenu" + str(block)] = contenu
                     contenu = ''
-                print(line)
+
                 data['titre'+str(block)] = line
-                print(data)
+
                 block +=1
 
             elif line.strip() == 'Introduction' or line.strip() == 'Evaluer Bugzilla' or line.strip()=="Obtenir plus d'aide" or line.strip()=='Conventions du document' or\
@@ -551,7 +549,7 @@ def schema5(filename):
                         flag, titre, soustitre, soustitre2 = getTitre(test_string)
 
                     if flag and f and not noDuplicateTitre(test_string,data):
-                        print(test_string)
+
                         if re.fullmatch(titre, test_string):
                             if contenu != '':
                                 data['contenu' + str(i - 1)] = contenu
@@ -654,7 +652,7 @@ def juridiqueSch2(filename):
         for line in lines:
 
             if line[0] == '':
-                print(True)
+
                 line = line[1:]
             if i == 0:
                 if len(line)>1:
@@ -737,7 +735,7 @@ def juridiqueSch2(filename):
             prec = line
         if contenue != '':
             data['contenu' + str(ct)] = contenue
-    print(data)
+
     return data
 
 def juridiqueSch(filename):
@@ -776,7 +774,7 @@ def juridiqueSch(filename):
         for line in lines:
 
             if line[0] == '':
-                print(True)
+
                 line = line[1:]
             if i == 0:
                 if len(line) > 1:
@@ -932,7 +930,7 @@ def juridiqueSch(filename):
             data['Artcontenu' + str(an)] = contenueAr
 
 
-    print(data)
+
     return data
 
 def articleFonction(line):

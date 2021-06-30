@@ -77,15 +77,3 @@ def extractor(file_path,text_filename, debut, fin):
     else:
         tesseractProcess(file_path, extract_text_path)
         addContent(text_filename)
-#
-#
-#
-#     print(input_path)
-#     print(filename)
-#     print(extension)
-#
-# input_path = 'Bugzilla.pdf'
-# output = 'visio'
-# output_path = 'images'
-# text_file = open('text/bugzilla.text','a+')
-# extractor(input_path,text_file)
